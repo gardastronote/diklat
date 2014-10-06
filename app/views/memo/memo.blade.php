@@ -18,17 +18,17 @@
 		<h1>{{$memo->user->full_name}}</h1>
 		<small class="memo-date">{{$memo->created_at}}</small>
 	</div>
-	@if($memo->status_memo == 1)
+	@if($memo->status_memo == ACCEPTED)
 		<?php
 		$status = 'accepted';
 		$glyph = 'glyphicon glyphicon-ok';
 		?>
-		@elseif($memo->status_memo == 2)
+		@elseif($memo->status_memo == REJECTED)
 		<?php
 		$status = 'rejected';
 		$glyph = 'glyphicon glyphicon-remove';
 		?>
-		@elseif($memo->status_memo == 3)
+		@elseif($memo->status_memo == EDIT)
 		<?php
 		$status = 'edit';
 		$glyph = 'glyphicon glyphicon-pencil';
@@ -56,23 +56,23 @@
 		<ul class="list-group">
 			<li class="list-group-item">
 				<h4 class="list-group-item-heading">RBB:</h4>
-				<p class="list-group-item-text">{{$memo->rbb->rbb}}</p>
+				<p class="list-group-item-text"><span class="glyphicon glyphicon-list-alt"></span> {{$memo->rbb->rbb}}</p>
 			</li>
 			<li class="list-group-item">
 				<h4 class="list-group-item-heading">Karakter:</h4>
-				<p class="list-group-item-text">{{$memo->karakter}}</p>
+				<p class="list-group-item-text"><span class="glyphicon glyphicon-tasks"></span> {{$memo->karakter}}</p>
 			</li>
 			<li class="list-group-item">
-				<h4 class="list-group-item-heading">Jumlah:</h4>
-				<p class="list-group-item-text">{{$memo->jumlah}}</p>
+				<h4 class="list-group-item-heading">Jumlah Peserta:</h4>
+				<p class="list-group-item-text"><span class="glyphicon glyphicon-user"></span> {{$memo->jumlah}} Orang</p>
 			</li>
 			<li class="list-group-item">
 				<h4 class="list-group-item-heading">Lama:</h4>
-				<p class="list-group-item-text">{{$memo->lama}} Hari</p>
+				<p class="list-group-item-text"><span class="glyphicon glyphicon-time"></span> {{$memo->lama}} Hari</p>
 			</li>
 			<li class="list-group-item">
 				<h4 class="list-group-item-heading">Anggaran:</h4>
-				<p class="list-group-item-text">Rp.{{$memo->anggaran}}</p>
+				<p class="list-group-item-text"><span class="glyphicon glyphicon-inbox"></span> Rp.{{$memo->anggaran}}</p>
 			</li>
 		</ul>
 	</div>
@@ -103,9 +103,10 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-9 form-comment">
-				{{Form::open(['url'=>'/data-memo/data/comment','method'=>'POST'])}}
-				<div class="form-group">
+				{{Form::open(['url'=>'/data-memo/data/comment/add','method'=>'POST'])}}
+				<div class="form-group @if($errors->has('comment')) has-error @endif">
 					{{Form::textarea('comment','',['class'=>'form-control','rows'=>3])}}
+					@if($errors->has('comment'))<p class="help-block text-center">{{$errors->first('comment')}}</p>@endif
 				</div>
 				<div class="form-group">
 					{{Form::hidden('id_memo',$memo->id)}}

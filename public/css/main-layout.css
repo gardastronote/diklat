@@ -126,6 +126,9 @@ body {
 .rejected{
 	background-color: rgba(255,0,0,.5) !important;
 }
+.edit{
+	background-color: rgba(255,128,0,.5) !important;
+}
 
 .memo-link{
 	color: rgb(255,0,0);

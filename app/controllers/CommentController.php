@@ -32,7 +32,7 @@ class CommentController extends BaseController
 			));
 	}
 
-	public function postEdit(){
+	public function post_edit(){
 		$input = Input::all();
 		$validated = Validator::make($input,Memo_comment::rules(),Memo_comment::messages());
 		if($validated->passes()){
@@ -40,10 +40,11 @@ class CommentController extends BaseController
 			if(!$comment){
 				return Redirect::back()->with('alert-error',ERR_DEV);
 			}
-			return Redirect::action('MemoController@view',$input['id_memo'])->with('alert-success','Komentar berhasil di ubah');
+			return Redirect::to('data-memo/data/'.$input['id_memo'])->with('alert-success','Komentar berhasil di ubah');
 		}
 		return Redirect::back()->withInput()->withErrors($validated);
 	}
+
 	public function post_add(){
 		$input = Input::all();
 		$validated = Validator::make($input,Memo_comment::rules(),Memo_comment::messages());

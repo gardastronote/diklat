@@ -98,7 +98,7 @@
 			<div class="col-md-offset-4 col-md-8">
 				{{ Form::hidden('id_user',$user->id)}}
 				{{ Form::hidden('id',isset($memo->id)?$memo->id:'') }}
-				{{ Form::submit($btn,['class'=>'btn btn-success']) }}
+				{{ Form::submit($btn,['class'=>'btn btn-success btn-flat']) }}
 			</div>
 		</div>
 	</div>
