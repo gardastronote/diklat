@@ -117,11 +117,24 @@ Route::group(array('before'=>'auth'),function(){
 	Route::post('/data-memo/edit','MemoController@post_edit');
 	Route::get('/data-memo/delete/{id}','MemoController@delete');
 
+	Route::get('/data-memo/status/{id}/{status}','MemoController@status');
+
 	/*--------------------------------------------------------------------
 	| Comment memo
 	|---------------------------------------------------------------------
 	*/
-	Route::post('/data-memo/data/comment','CommentController@post_add');
+
+	Route::get('/data-memo/data/comment/{id}',function($id){
+		$comment = Memo_comment::find($id);
+		if(!count($comment)>0){
+			App::abort(404,'Halaman tidak di temukan');
+		}
+		return View::make('memo.memo-comment',array(
+			'comment'=>$comment
+			));
+	});
+	Route::post('/data-memo/data/comment/edit','CommentController@post_edit');
+	Route::post('/data-memo/data/comment/add','CommentController@post_add');
 
 	Route::get('/task/memo',array(
 		'as'=>'task_memo',

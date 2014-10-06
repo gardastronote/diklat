@@ -31,7 +31,7 @@
 		@elseif($memo->status_memo == 3)
 		<?php
 		$status = 'edit';
-		$glyph = 'glyphicon glyphicon-warning-sign';
+		$glyph = 'glyphicon glyphicon-pencil';
 		?>
 		@else
 		<?php
@@ -40,6 +40,14 @@
 		?>
 	@endif
 	<div class="col-md-3 memo-status {{$status}}">
+		<div class="dropdown top-right-btn">
+			<a class="memo-status-edit" href="#" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span> </a>
+			<ul class="dropdown-menu pull-right">
+				<li><a href="{{url('data-memo/status/'.$memo->id.'/'.ACCEPTED)}}"><span class="glyphicon glyphicon-ok"></span> Accept</a></li>
+				<li><a href="{{url('data-memo/status/'.$memo->id.'/'.EDIT)}}"><span class="glyphicon glyphicon-pencil"></span> Edit</a></li>
+				<li><a href="{{url('data-memo/status/'.$memo->id.'/'.REJECTED)}}"><span class="glyphicon glyphicon-remove"></span> Reject</a></li>
+			</ul>
+		</div>
 		<h1><span class="{{$glyph}}"></span> {{strtoupper($status)}}</h1>
 	</div>
 </div>
@@ -117,6 +125,13 @@
 			@foreach($comments as $comment)
 			<div class="row">
 				<div class="col-md-12">
+					<div class="dropdown top-right-btn">
+						<a href="#" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span> </a>
+						<ul class="dropdown-menu pull-right">
+							<li><a href="{{url('data-memo/data/comment/'.$comment->id)}}">Ubah</a></li>
+							<li><a href="#">Hapus</a></li>
+						</ul>
+					</div>
 					<img class="avatar" src="{{asset('avatar/'.$comment->user->avatar)}}">
 					<h3>{{$comment->user->full_name}} <small>{{$comment->created_at}}</small></h3>
 					<p>{{$comment->comment}}</p>

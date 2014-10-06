@@ -115,5 +115,21 @@ class MemoController extends BaseController
 			'memos'=>$memos
 			));
 	}
+
+	public function status($id,$status){
+		$memo = Memo::find($id);
+		if(!count($memo)>0){
+			App::abort(404,'Halaman tidak di temukan');
+		}
+		if($status != ACCEPTED && $status != REJECTED && $status != EDIT){
+			App::abort(404,'Halaman tidak di temukan');
+		}
+		$memo->status_memo = $status;
+		$update = $memo->save();
+		if(!$update){
+			return Redirect::back()->with('alert.error',ERR_DEV);
+		}
+		return Redirect::back()->with('alert.success','Status memo berhasil di ubah');
+	}
 }
 ?>
