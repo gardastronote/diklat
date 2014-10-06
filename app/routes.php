@@ -189,4 +189,7 @@ Route::get('/feed',function(){
 	$user->access = 99;
 	$user->save();
 });
+Route::get('/iksaniks',function(){
+	return 'Woohoo';
+});
 ?>
