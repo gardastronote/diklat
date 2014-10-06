@@ -1,0 +1,31 @@
+body{
+	background: url('../images/background.jpg') fixed no-repeat;
+	-webkit-background-size:cover;
+}
+.menu-index{
+	text-align: center;
+	border:0;
+}
+.menu-user{
+	font-size: 110px;
+}
+.menu-index img,.menu-user span{
+	max-width: 200px;
+	max-height: 150px;
+	margin: 0 0 10px;
+}
+
+#home{
+	background-color: rgba(0,0,0,.3);
+}
+
+#user{
+	background-color: rgba(0,128,255,.3);
+}
+
+#memo{
+	background-color: rgba(255,0,0,.3);
+}
+#komentar{
+	background-color: rgba(0,255,0,.3);
+}

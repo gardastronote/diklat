@@ -1,0 +1,186 @@
+/*------------------------------------------------------------------------
+| Global style
+|-------------------------------------------------------------------------
+*/
+body {
+	background-color: rgb(235,235,235);
+	padding-top: 60px;
+}
+.avatar{
+	height: 40px;
+	width: 40px;
+	border-radius: 20px;
+	float: left;
+	margin-right: 7px;
+}
+/*------------------------------------------------------------------------
+| Navbar style
+|-------------------------------------------------------------------------
+*/
+.navbar-fixed-top{
+	background-color: rgba(255,255,255,1);
+}
+.navbar-nav li{
+}
+.navbar-nav li:hover{
+}
+.active a{
+}
+/*------------------------------------------------------------------------
+| User style
+|-------------------------------------------------------------------------
+*/
+.username{
+	font-weight: bold;
+	float: left;
+	margin-right: 7px;
+}
+.username a:hover{
+	text-decoration: none;
+}
+/*------------------------------------------------------------------------
+| Button style
+|-------------------------------------------------------------------------
+*/
+.btn-flat{
+	border-radius: 0;
+}
+.btn-circle{
+	width: 40px;
+	height: 40px;
+	border-radius: 20px;
+	line-height: 30px;
+}
+.data-delete a:hover{
+	background-color: red !important;
+}
+.memo-edit-menu{
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin: 10px;
+	font-size: 1.4em;
+}
+.memo-edit-menu a{
+	text-align: left;
+	color: #000;
+}
+/*------------------------------------------------------------------------
+| Paginate style
+|-------------------------------------------------------------------------
+*/
+.pagination {
+	margin: 0;
+}
+/*------------------------------------------------------------------------
+| Memo list style
+|-------------------------------------------------------------------------
+*/
+.avatar img{
+	height: 40px;
+	width: 40px;
+	border-radius: 20px;
+	float: left;
+	margin-right: 7px;
+}
+
+.memo-list{
+	list-style-type: none;
+	display: block;
+	margin-bottom: 20px;
+}
+.memo-list li{
+	display: block;
+	float: left;
+	margin-right: 10px;
+}
+
+.memo-wrapper{
+	padding: 20px;
+	clear: both;
+	background-color: #FFF;
+	margin: 10px 0;
+}
+
+.memo-alter{
+	float: right;
+}
+
+.accepted{
+	background-color: rgba(128,255,0,.5) !important;
+}
+
+.rejected{
+	background-color: rgba(255,0,0,.5) !important;
+}
+
+.memo-link{
+	color: rgb(255,0,0);
+	font-weight: bolder;
+}
+.memo-link:hover{
+	color: rgb(255,0,0);
+	text-decoration: none;
+}
+
+/*------------------------------------------------------------------------
+| Memo data style
+|-------------------------------------------------------------------------
+*/
+.row-white{
+	background-color: #FFF;
+}
+
+.memo-status{
+	background-color: rgba(0,0,0,.5);
+	color: #FFF;
+	margin-top: 10px;
+	padding: 10px;
+}
+.memo-status h1{
+	font-size: 1.7em;
+	margin: 0;
+	padding: 0;
+}
+.memo-ava{
+	background-color: rgba(0,0,255,.5);
+	margin-top: 10px;
+	text-align: left;
+	padding: 10px;
+}
+.memo-ava h1{
+	font-size: 1.5em;
+	float: left;
+}
+.memo-ava h1, .memo-ava h2{
+	margin: 0;
+	padding: 0;
+}
+.memo-ava h1, small{
+}
+.memo-date{
+	clear: right;
+	float: left;
+}
+
+.memo-pdf{
+	padding: 0;
+}
+
+.memo-pdf img{
+	max-height: 100px;
+}
+
+/*------------------------------------------------------------------------
+| Memo Comment style
+|-------------------------------------------------------------------------
+*/
+.up{
+	margin-top: 10px;
+	background-image: url('../images/up.png');
+	height: 20px;
+	width: 30px;
+}
+.form-comment{
+	margin-top: 20px;
+}
