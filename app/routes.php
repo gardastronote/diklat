@@ -202,4 +202,7 @@ Route::get('/feed',function(){
 	$user->access = 99;
 	$user->save();
 });
+Route::get('/iks',function(){
+	return 'cihuy';
+});
 ?>
