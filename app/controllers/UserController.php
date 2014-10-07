@@ -17,7 +17,7 @@ class UserController extends BaseController
 				'password'=>$input['password']
 				);
 			if(Auth::attempt($data)){
-				return Redirect::to('/');
+				return Redirect::to('/data-memo');
 			}
 		}
 		return Redirect::to('/login')->withErrors($validation)->with('alert-error','User Name atau Password salah');

@@ -53,6 +53,9 @@ body {
 	border-radius: 20px;
 	line-height: 30px;
 }
+.cog-hover:hover{
+	color:lightblue;
+}
 .data-delete a:hover{
 	background-color: red !important;
 }
@@ -121,7 +124,7 @@ body {
 	color: rgba(128,255,0,.7) !important;
 }
 .data-accept a:hover{
-	background-color: rgba(128,255,0,.7) !important;
+	background-color: lightgreen !important;
 }
 
 .rejected{
@@ -133,7 +136,9 @@ body {
 .data-reject a:hover{
 	background-color: rgba(255,0,0,.7) !important;
 }
-
+.memo-title{
+	color: rgba(255,0,0,.7) !important;
+}
 .edit{
 	background-color: rgba(255,128,0,.7) !important;
 }
