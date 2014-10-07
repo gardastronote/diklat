@@ -165,7 +165,7 @@ class UserController extends BaseController
 		}
 		return Redirect::back()->withErrors($validated)->withInput();
 	}
-	public function user_editPost(){
+	public function edit(){
 		$input = Input::all();
 		$user = User::find($input['id']);
 		if(!count($user) > 0){
@@ -196,7 +196,7 @@ class UserController extends BaseController
 			if(!$update){
 				return Redirect::back()->withInput()->with('alert-error',ERR_DEV);
 			}
-			return Redirect::action('UserController@profile',$input['id'])->with('alert-success','Profil berhasil di ubah');
+			return Redirect::to('data-user/data/'.$input['id'])->with('alert-success','Profil berhasil di ubah');
 		}
 		return Redirect::back()->withInput()->withErrors($validated);
 	}
@@ -230,7 +230,7 @@ class UserController extends BaseController
 		File::delete(public_path().'/avatar/'.$data->avatar);
 		$data->avatar = 'default.png';
 		$data->save();
-		return Redirect::action('UserController@profile',$id)->with('alert-success','Avatar berhasil di hapus');
+		return Redirect::to('data-user/data/'.$id)->with('alert-success','Avatar berhasil di hapus');
 	}
 	public function add(){
 		return View::make('user.merge',array(

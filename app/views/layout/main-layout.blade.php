@@ -25,11 +25,12 @@
 		<ul class="nav navbar-nav navbar-right">
 			<li class="dropdown">
 				<a class="dropdown-toggle ava-menu" data-toggle="dropdown" href="#">
-					<img class="avatar" src="{{asset('avatar/'.Auth::user()->avatar)}}"> {{Auth::user()->full_name}} <b class="caret"></b>
+					 <b class="caret"></b> {{Auth::user()->full_name}}
+					 <img class="avatar" src="{{asset('avatar/'.Auth::user()->avatar)}}">
 				</a>
 				<ul class="dropdown-menu">
-					<li><a href="#"><span class="glyphicon glyphicon-user"></span> {{Auth::user()->username}}</a></li>
-					<li><a href="#"><span class="glyphicon glyphicon-cog"></span> Pengaturan</a></li>
+					<li><a href="{{url('data-user/data/'.Auth::user()->id)}}"><span class="glyphicon glyphicon-user"></span> {{Auth::user()->username}}</a></li>
+					<li><a href="{{url('data-user/edit/'.Auth::user()->id)}}"><span class="glyphicon glyphicon-cog"></span> Pengaturan</a></li>
 					<li><a href="{{url('/logout')}}"><span class="glyphicon glyphicon-log-out"></span> Keluar</a></li>
 				</ul>
 			</li>
