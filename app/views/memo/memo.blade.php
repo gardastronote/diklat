@@ -14,9 +14,8 @@
 		<h3><small>{{$memo->status}}</small></h3>
 	</div>
 	<div class="col-md-3 memo-ava">
-		<img class="avatar" src="{{asset('avatar/'.$memo->user->avatar)}}"/>
-		<h1>{{$memo->user->full_name}}</h1>
-		<small class="memo-date">{{$memo->created_at}}</small>
+		<h1><img class="avatar" src="{{asset('avatar/'.$memo->user->avatar)}}"/> {{$memo->user->full_name}}</h1>
+		<small class="memo-date">{{date('d M g:i A',strtotime($memo->created_at))}}</small>
 	</div>
 	@if($memo->status_memo == ACCEPTED)
 		<?php
@@ -43,9 +42,9 @@
 		<div class="dropdown top-right-btn">
 			<a class="memo-status-edit" href="#" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span> </a>
 			<ul class="dropdown-menu pull-right">
-				<li><a href="{{url('data-memo/status/'.$memo->id.'/'.ACCEPTED)}}"><span class="glyphicon glyphicon-ok"></span> Accept</a></li>
-				<li><a href="{{url('data-memo/status/'.$memo->id.'/'.EDIT)}}"><span class="glyphicon glyphicon-pencil"></span> Edit</a></li>
-				<li><a href="{{url('data-memo/status/'.$memo->id.'/'.REJECTED)}}"><span class="glyphicon glyphicon-remove"></span> Reject</a></li>
+				<li class="data-accept"><a href="{{url('data-memo/status/'.$memo->id.'/'.ACCEPTED)}}"><span class="glyphicon glyphicon-ok"></span> Accept</a></li>
+				<li class="data-edit"><a href="{{url('data-memo/status/'.$memo->id.'/'.EDIT)}}"><span class="glyphicon glyphicon-pencil"></span> Edit</a></li>
+				<li class="data-reject"><a href="{{url('data-memo/status/'.$memo->id.'/'.REJECTED)}}"><span class="glyphicon glyphicon-remove"></span> Reject</a></li>
 			</ul>
 		</div>
 		<h1><span class="{{$glyph}}"></span> {{strtoupper($status)}}</h1>
@@ -130,11 +129,11 @@
 						<a href="#" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span> </a>
 						<ul class="dropdown-menu pull-right">
 							<li><a href="{{url('data-memo/data/comment/'.$comment->id)}}">Ubah</a></li>
-							<li><a href="#">Hapus</a></li>
+							<li class="data-delete"><a href="{{url('/data-memo/data/comment/delete/'.$comment->id)}}">Hapus</a></li>
 						</ul>
 					</div>
 					<img class="avatar" src="{{asset('avatar/'.$comment->user->avatar)}}">
-					<h3>{{$comment->user->full_name}} <small>{{$comment->created_at}}</small></h3>
+					<h3>{{$comment->user->full_name}} <small>{{date('d M g:i A',strtotime($memo->created_at))}}</small></h3>
 					<p>{{$comment->comment}}</p>
 				</div>
 			</div>

@@ -71,13 +71,43 @@ Route::group(array('before'=>'auth'),function(){
 		'as'=>'task',
 		'uses'=>'TaskController@index'
 		));
+	/*--------------------------------------------------------------------
+	| User
+	|---------------------------------------------------------------------
+	*/
+	Route::get('/profile',array(
+		'uses'=>'UserController@index'
+		));
 
 	/*--------------------------------------------------------------------
 	| Data memo
 	|---------------------------------------------------------------------
 	*/
+	Route::get('/data-memo/search','MemoController@search');
 	Route::get('/data-memo',function(){
-		$memos = Memo::orderBy('updated_at','DESC')->paginate(3);
+		$memos = Memo::orderBy('updated_at','DESC')->orderBy('created_at','DESC')->paginate(10);
+		return View::make('memo.data_memo',array(
+			'memos'=>$memos
+			));
+	});
+	//data memo acceptedd
+	Route::get('/data-memo/accepted',function(){
+		$memos = Memo::where('status_memo','=',1)->orderBy('created_at','DESC')->paginate(10);
+		return View::make('memo.data_memo',array(
+			'memos'=>$memos
+			));
+	});
+	//data memo edit
+	Route::get('/data-memo/edit',function(){
+		$memos = Memo::where('status_memo','=',2)->orderBy('created_at','DESC')->paginate(10);
+		return View::make('memo.data_memo',array(
+			'memos'=>$memos
+			));
+	});
+
+	//data memo reject
+	Route::get('/data-memo/rejected',function(){
+		$memos = Memo::where('status_memo','=',3)->orderBy('created_at','DESC')->paginate(10);
 		return View::make('memo.data_memo',array(
 			'memos'=>$memos
 			));
@@ -135,7 +165,7 @@ Route::group(array('before'=>'auth'),function(){
 	});
 	Route::post('/data-memo/data/comment/edit','CommentController@post_edit');
 	Route::post('/data-memo/data/comment/add','CommentController@post_add');
-
+	Route::get('/data-memo/data/comment/delete/{id}','CommentController@delete');
 	Route::get('/task/memo',array(
 		'as'=>'task_memo',
 		'uses'=>'MemoController@index'

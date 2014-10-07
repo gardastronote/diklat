@@ -26,6 +26,10 @@ body {
 }
 .active a{
 }
+.ava-menu img{
+	position: relative;
+	top: -10px;
+}
 /*------------------------------------------------------------------------
 | User style
 |-------------------------------------------------------------------------
@@ -120,14 +124,33 @@ body {
 }
 
 .accepted{
-	background-color: rgba(128,255,0,.5) !important;
+	background-color: rgba(128,255,0,.7) !important;
+}
+.accepted-color{
+	color: rgba(128,255,0,.7) !important;
+}
+.data-accept a:hover{
+	background-color: rgba(128,255,0,.7) !important;
 }
 
 .rejected{
-	background-color: rgba(255,0,0,.5) !important;
+	background-color: rgba(255,0,0,.7) !important;
 }
+.rejected-color{
+	color: rgba(255,0,0,.7) !important;
+}
+.data-reject a:hover{
+	background-color: rgba(255,0,0,.7) !important;
+}
+
 .edit{
-	background-color: rgba(255,128,0,.5) !important;
+	background-color: rgba(255,128,0,.7) !important;
+}
+.edit-color{
+	color: rgba(255,128,0,.7) !important;
+}
+.data-edit a:hover{
+	background-color: rgba(255,128,0,.7) !important;
 }
 
 .memo-link{
@@ -143,6 +166,17 @@ body {
 | Memo data style
 |-------------------------------------------------------------------------
 */
+.list-status{
+	position:absolute;
+	right:0;
+	top:0;
+	margin:20px;
+	font-size:1.5em;
+}
+.memo-date{
+	clear: both;
+	float: left;
+}
 .row-white{
 	background-color: #FFF;
 }
@@ -159,7 +193,6 @@ body {
 	padding: 0;
 }
 .memo-ava{
-	background-color: rgba(0,0,255,.5);
 	margin-top: 10px;
 	text-align: left;
 	padding: 10px;
@@ -174,9 +207,8 @@ body {
 }
 .memo-ava h1, small{
 }
-.memo-date{
-	clear: right;
-	float: left;
+.memo-data{
+	margin-top: 15px;
 }
 
 .memo-pdf{

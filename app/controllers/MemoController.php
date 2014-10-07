@@ -99,7 +99,7 @@ class MemoController extends BaseController
 	public function search(){
 		$type = Input::get('type');
 		$query = Input::get('query');
-		if($type !== 'nomor_memo' && $type !== 'nama_memo' && $type !== 'pic' && $type !== 'rbb' && $type !== 'karakter'){
+		if($type !== 'nomor_memo' && $type !== 'nama_memo' && $type !== 'rbb' && $type !== 'karakter'){
 			App::abort(404,'Halaman tidak ditemukan');
 		}
 		if($type == 'rbb'){
@@ -110,8 +110,7 @@ class MemoController extends BaseController
 			$memos = Memo::where($type,'LIKE',"%$query%")->paginate(7);
 		}
 
-		return View::make('diklat.task.memo.search',array(
-			'user'=>$this->user,
+		return View::make('memo.data_memo',array(
 			'memos'=>$memos
 			));
 	}
