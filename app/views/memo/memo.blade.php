@@ -3,7 +3,7 @@
 <div class="row row-white">
 	<div class="col-md-9 memo-data text-center">
 		<div class="dropdown memo-edit-menu">
-			<a data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-cog"></span></a>
+			<a data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-cog cog-hover"></span></a>
 			<ul class="dropdown-menu">
 				<li><a href="{{url('/data-memo/edit/'.$memo->id)}}">Ubah</a></li>
 				<li class="data-delete"><a href="{{url('/data-memo/delete/'.$memo->id)}}">Hapus</a></li>

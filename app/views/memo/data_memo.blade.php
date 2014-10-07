@@ -62,7 +62,7 @@
 			<a href="{{url('data-memo/data/'.$memo->id)}}" class="list-group-item">
 				<h4 class="list-group-heading"><img class="avatar" src="{{asset('avatar/'.$memo->user->avatar)}}"> {{$memo->user->full_name}} <small>{{date('d M g:i A',strtotime($memo->created_at))}}</small></h4>
 				<p class="list-group-item-text">
-					<span>{{$memo->nama_memo}} <small>{{$memo->nomor_memo}}</small></span>
+					<span class="memo-title"><strong>{{$memo->nama_memo}}</strong></span><span> <small>{{$memo->nomor_memo}}</small></span>
 					<span class="badge">{{$memo->rbb->rbb}}</span>
 					<span class="badge">{{$memo->karakter}}</span>
 					<span class="badge">{{$memo->status}}</span>
