@@ -21,18 +21,29 @@ body {
 .add-memo a{
 	color: #FFF !important
 }
-.logo-bjb{
-	height: 40px;
-	width: 40px;
-	padding: -20px 0;
+.add-memo-hover:hover{
+	background-color: lightgreen;
 }
-.navbar-fixed-top{
-	background-color: rgba(255,255,255,1);
+.add-memo-hover2:hover{
+	background-color: lightblue;
 }
+
 .ava-menu img{
 	position: relative;
 	margin: -20px 0;
 }
+
+.logo-bjb{
+	height: 30px;
+	width: 40px;
+	margin-top:6px;
+	margin-left: 10px;
+}
+.navbar-fixed-top{
+	background-color: rgba(255,255,255,1);
+}
+
+
 /*------------------------------------------------------------------------
 | User style
 |-------------------------------------------------------------------------

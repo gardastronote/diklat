@@ -12,8 +12,8 @@
 	<div class="container">
 		@if(Auth::check())
 		<ul class="nav navbar-nav">
-			<li class="add-memo"><a href="{{url('data-memo/add')}}"><span class="glyphicon glyphicon-edit"></span> Buat Memo</a></li>
-			<li class="dropdown">
+			<li class="add-memo add-memo-hover"><a href="{{url('data-memo/add')}}"><span class="glyphicon glyphicon-edit"></span> Buat Memo</a></li>
+			<li class="dropdown add-memo-hover2">
 				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Memo <b class="caret"></b></a>
 				<ul class="dropdown-menu">
 					<li><a href="{{url('/data-memo')}}">Daftar memo</a></li>
@@ -27,11 +27,11 @@
 		</ul>
 		@endif
 		<ul class="nav navbar-nav">
-			<li><img class="logo-bjb" src="{{asset('images/logo_black.png')}}"></li>
+			<li><img class="logo-bjb text-center" src="{{asset('images/logo_black.png')}}"></li>
 		</ul>
 		@if(Auth::check())
 		<ul class="nav navbar-nav navbar-right">
-			<li class="dropdown">
+			<li class="dropdown add-memo-hover2">
 				<a class="dropdown-toggle ava-menu" data-toggle="dropdown" href="#">
 					 <b class="caret"></b> {{Auth::user()->full_name}}
 					 <img class="avatar" src="{{asset('avatar/'.Auth::user()->avatar)}}">
