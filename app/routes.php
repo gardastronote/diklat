@@ -110,7 +110,14 @@ Route::group(array('before'=>'auth'),function(){
 			'memos'=>$memos
 			));
 	});
-	//data memo acceptedd
+	//data memo unchecked
+	Route::get('/data-memo/unchecked',function(){
+		$memos = Memo::where('status_memo','=',0)->orderBy('created_at','DESC')->paginate(10);
+		return View::make('memo.data_memo',array(
+			'memos'=>$memos
+			));
+	});
+	//data memo accepted
 	Route::get('/data-memo/accepted',function(){
 		$memos = Memo::where('status_memo','=',1)->orderBy('created_at','DESC')->paginate(10);
 		return View::make('memo.data_memo',array(
@@ -250,7 +257,8 @@ Route::post('/login','UserController@postLogin');
 Route::get('/feed',function(){
 	$user = new User;
 	$user->password = Hash::make('admin');
-	$user->username = 'admin';
+	$user->username = 'pp';
+	$user->access = 1;
 	$user->save();
 });
 ?>

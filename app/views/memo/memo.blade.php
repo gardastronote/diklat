@@ -2,6 +2,7 @@
 @section('content')
 <div class="row row-white">
 	<div class="col-md-9 memo-data text-center">
+		@if(Auth::user()->access == ADMIN || Auth::user()->id == $memo->id_user )
 		<div class="dropdown memo-edit-menu">
 			<a data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-cog cog-hover"></span></a>
 			<ul class="dropdown-menu">
@@ -9,13 +10,13 @@
 				<li class="data-delete"><a href="{{url('/data-memo/delete/'.$memo->id)}}">Hapus</a></li>
 			</ul>
 		</div>
+		@endif
 		<h1>{{$memo->nama_memo}}</h1>
 		<h2><small>{{$memo->nomor_memo}}</small></h2>
 		<h3><small>{{$memo->status}}</small></h3>
 	</div>
 	<div class="col-md-3 memo-ava">
-		<h1><img class="avatar" src="{{asset('avatar/'.$memo->user->avatar)}}"/> {{$memo->user->full_name}}</h1>
-		<small class="memo-date">{{date('d M g:i A',strtotime($memo->created_at))}}</small>
+		<h1><img class="avatar" src="{{asset('avatar/'.$memo->user->avatar)}}"/> {{$memo->user->full_name}} <small class="memo-date">{{date('d M g:i A',strtotime($memo->created_at))}}</small></h1>
 	</div>
 	@if($memo->status_memo == ACCEPTED)
 		<?php
@@ -39,6 +40,7 @@
 		?>
 	@endif
 	<div class="col-md-3 memo-status {{$status}}">
+		@if(Auth::user()->access == ADMIN || Auth::user()->access == PINGROUP)
 		<div class="dropdown top-right-btn">
 			<a class="memo-status-edit" href="#" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span> </a>
 			<ul class="dropdown-menu pull-right">
@@ -47,6 +49,7 @@
 				<li class="data-reject"><a href="{{url('data-memo/status/'.$memo->id.'/'.REJECTED)}}"><span class="glyphicon glyphicon-remove"></span> Reject</a></li>
 			</ul>
 		</div>
+		@endif
 		<h1><span class="{{$glyph}}"></span> {{strtoupper($status)}}</h1>
 	</div>
 </div>
@@ -125,6 +128,7 @@
 			@foreach($comments as $comment)
 			<div class="row">
 				<div class="col-md-12">
+					@if(Auth::user()->access == ADMIN || Auth::user()->id == $comment->id_user)
 					<div class="dropdown top-right-btn">
 						<a href="#" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span> </a>
 						<ul class="dropdown-menu pull-right">
@@ -132,8 +136,8 @@
 							<li class="data-delete"><a href="{{url('/data-memo/data/comment/delete/'.$comment->id)}}">Hapus</a></li>
 						</ul>
 					</div>
-					<img class="avatar" src="{{asset('avatar/'.$comment->user->avatar)}}">
-					<h3>{{$comment->user->full_name}} <small>{{date('d M g:i A',strtotime($memo->created_at))}}</small></h3>
+					@endif
+					<h3><img class="avatar" src="{{asset('avatar/'.$comment->user->avatar)}}"> {{$comment->user->full_name}} <small>{{date('d M g:i A',strtotime($memo->created_at))}}</small></h3>
 					<p>{{$comment->comment}}</p>
 				</div>
 			</div>
