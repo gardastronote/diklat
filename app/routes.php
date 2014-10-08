@@ -75,9 +75,29 @@ Route::group(array('before'=>'auth'),function(){
 	| User
 	|---------------------------------------------------------------------
 	*/
-	Route::get('/profile',array(
-		'uses'=>'UserController@index'
-		));
+
+	Route::get('data-user/data/{id}',function($id){
+		$user = User::find($id);
+		if(!count($user)>0){
+			App::abort(404,'Halaman tidak di temukan');
+		}
+		return View::make('user.data-user',array(
+			'user'=>$user
+			));
+	});
+
+	Route::get('data-user/edit/{id}',function($id){
+		$user = User::find($id);
+		if(!count($user)>0){
+			App::abort(404,'Halaman tidak di temukan');
+		}
+		return View::make('user.merge',array(
+			'user'=>$user,
+			'submit'=>'Ubah'
+			));
+	});
+
+	Route::post('data-user/edit','UserController@edit');
 
 	/*--------------------------------------------------------------------
 	| Data memo
@@ -228,8 +248,9 @@ Route::get('/logout',array(
 
 Route::post('/login','UserController@postLogin');
 Route::get('/feed',function(){
-	$user = User::find(7);
-	$user->access = 99;
+	$user = new User;
+	$user->password = Hash::make('admin');
+	$user->username = 'admin';
 	$user->save();
 });
 ?>

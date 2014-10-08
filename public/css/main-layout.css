@@ -9,9 +9,7 @@ body {
 .avatar{
 	height: 40px;
 	width: 40px;
-	-radius: 20px;
-	float: left;
-	margin-right: 7px;
+	border-radius: 20px;
 }
 /*------------------------------------------------------------------------
 | Navbar style
@@ -28,7 +26,7 @@ body {
 }
 .ava-menu img{
 	position: relative;
-	top: -10px;
+	margin: -20px 0;
 }
 /*------------------------------------------------------------------------
 | User style
@@ -96,13 +94,6 @@ body {
 | Memo list style
 |-------------------------------------------------------------------------
 */
-.avatar img{
-	height: 40px;
-	width: 40px;
-	border-radius: 20px;
-	float: left;
-	margin-right: 7px;
-}
 
 .memo-list{
 	list-style-type: none;
