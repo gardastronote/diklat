@@ -15,14 +15,19 @@ body {
 | Navbar style
 |-------------------------------------------------------------------------
 */
+.add-memo {
+  background-color: #5cb85c;
+}
+.add-memo a{
+	color: #FFF !important
+}
+.logo-bjb{
+	height: 40px;
+	width: 40px;
+	padding: -20px 0;
+}
 .navbar-fixed-top{
 	background-color: rgba(255,255,255,1);
-}
-.navbar-nav li{
-}
-.navbar-nav li:hover{
-}
-.active a{
 }
 .ava-menu img{
 	position: relative;
@@ -170,8 +175,7 @@ body {
 	font-size:1.5em;
 }
 .memo-date{
-	clear: both;
-	float: left;
+	font-size: 15px;
 }
 .row-white{
 	background-color: #FFF;

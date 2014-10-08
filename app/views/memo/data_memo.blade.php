@@ -20,11 +20,8 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-8 paginate text-left">
+	<div class="col-md-12 paginate text-center">
 		{{$memos->links()}}
-	</div>
-	<div class="col-md-4 text-right">
-		<a class="btn btn-success btn-flat" href="{{url('/data-memo/add')}}">Masukan Memo</a>
 	</div>
 </div>
 @if(!count($memos)>0)

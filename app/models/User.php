@@ -40,8 +40,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	public static function rulesCreate(){
 		return array(
-			'username'=>'required|alpha_dash|min:3|max:18|unique:users,username',
-			'full_name'=>'required|min:3|max:32',
+			'username'=>'required|alpha_dash|min:2|max:18|unique:users,username',
+			'full_name'=>'required|min:2|max:32',
 			'email'=>'email|unique:users,email',
 			'password'=>'required|min:3,max:12',
 			're_password'=>'required|same:password',
@@ -51,8 +51,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	public static function rulesEdit($id = NULL){
 		return array(
-			'username'=>"required|alpha_dash|min:3|max:12|unique:users,username,$id",
-			'full_name'=>'required|min:3|max:32',
+			'username'=>"required|alpha_dash|min:2|max:12|unique:users,username,$id",
+			'full_name'=>'required|min:2|max:32',
 			'password'=>'min:3,max:12',
 			're_password'=>'same:password',
 			'email'=>"email|unique:users,email,$id",
