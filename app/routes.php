@@ -75,6 +75,13 @@ Route::group(array('before'=>'auth'),function(){
 	| User
 	|---------------------------------------------------------------------
 	*/
+
+	Route::get('/data-user/data',function(){
+		$users = User::orderBy('created_at','DESC')->get();
+		return View::make('user.data_user',array(
+			'users'=>$users
+			));
+	});
 	Route::get('/data-user/add',function(){
 		return View::make('user.merge',array(
 			'url'=>'data-user/add',
@@ -99,6 +106,7 @@ Route::group(array('before'=>'auth'),function(){
 		}
 		return View::make('user.merge',array(
 			'user'=>$user,
+			'url'=>'data-user/edit',
 			'submit'=>'Ubah'
 			));
 	});

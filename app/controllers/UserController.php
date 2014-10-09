@@ -142,7 +142,7 @@ class UserController extends BaseController
 				GLOBAL ACTION
 ===================================*/
 
-	public function user_addPost(){
+	public function add(){
 		$input = Input::all();
 		$validated = Validator::make($input,User::rulesCreate(),User::messages());
 		if($validated->passes()){
@@ -235,7 +235,7 @@ class UserController extends BaseController
 	}
 
 
-	public function add(){
+	public function post_add(){
 		$input = Input::all();
 		$validated = Validator::make($input,User::rules(),User::messages());
 		if($validated->passes()){

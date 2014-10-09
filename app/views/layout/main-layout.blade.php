@@ -34,9 +34,6 @@
 			</li>			
 		</ul>
 		@endif
-		<ul class="nav navbar-nav">
-			<li><img class="logo-bjb text-center" src="{{asset('images/logo_black.png')}}"></li>
-		</ul>
 		@if(Auth::check())
 		<ul class="nav navbar-nav navbar-right">
 			<li class="dropdown add-memo-hover2">
