@@ -21,21 +21,25 @@
 	@if($memo->status_memo == ACCEPTED)
 		<?php
 		$status = 'accepted';
+		$message = 'Memo Di setujui';
 		$glyph = 'glyphicon glyphicon-ok';
 		?>
 		@elseif($memo->status_memo == REJECTED)
 		<?php
 		$status = 'rejected';
+		$message = 'Memo Di tolak';
 		$glyph = 'glyphicon glyphicon-remove';
 		?>
 		@elseif($memo->status_memo == EDIT)
 		<?php
 		$status = 'edit';
+		$message = 'Harus di ubah';
 		$glyph = 'glyphicon glyphicon-pencil';
 		?>
 		@else
 		<?php
 		$status = 'unchecked';
+		$message = 'Belum di periksa';
 		$glyph = 'glyphicon glyphicon-question-sign';
 		?>
 	@endif
@@ -50,7 +54,7 @@
 			</ul>
 		</div>
 		@endif
-		<h1><span class="{{$glyph}}"></span> {{strtoupper($status)}}</h1>
+		<h4><span class="{{$glyph}}"></span> {{strtoupper($message)}}</h4>
 	</div>
 </div>
 <div class="row row-white">
@@ -75,6 +79,16 @@
 			<li class="list-group-item">
 				<h4 class="list-group-item-heading">Anggaran:</h4>
 				<p class="list-group-item-text"><span class="glyphicon glyphicon-inbox"></span> Rp.{{$memo->anggaran}}</p>
+			</li>
+			<li class="list-group-item">
+				<h4 class="list-group-item-heading"><span class="glyphicon glyphicon-comment"></span> Keterangan:</h4>
+				<p class="list-group-item-text">
+					@if($memo->keterangan == '')
+					Tidak ada keterangan
+					@else
+					{{$memo->keterangan}}
+					@endif
+				</p>
 			</li>
 		</ul>
 	</div>

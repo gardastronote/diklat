@@ -132,7 +132,9 @@ body {
 .memo-alter{
 	float: right;
 }
-
+.comment-color{
+	color: #5cb85c;
+}
 .accepted{
 	background-color: rgba(128,255,0,.7) !important;
 }

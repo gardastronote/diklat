@@ -125,6 +125,13 @@ class MemoController extends BaseController
 		}
 		$memo->status_memo = $status;
 		$update = $memo->save();
+		$stat = array(
+			'id_from'=>Auth::user()->id,
+			'obj'=>$status,
+			'id_memo'=>$id,
+			'id_to'=>$memo->id_user
+			);
+		Notification::create($stat);
 		if(!$update){
 			return Redirect::back()->with('alert.error',ERR_DEV);
 		}

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class TimestampsNotif extends Migration {
+class StatusNullable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -13,7 +13,10 @@ class TimestampsNotif extends Migration {
 	public function up()
 	{
 		Schema::table('notif',function($table){
-			$table->timestamps();
+			$table->dropColumn('status');
+		});
+		Schema::table('notif',function($table){
+			$table->boolean('status')->default(0);
 		});
 	}
 
@@ -25,8 +28,10 @@ class TimestampsNotif extends Migration {
 	public function down()
 	{
 		Schema::table('notif',function($table){
-			$table->dropColumn('created_at');
-			$table->dropColumn('updated_at');
+			$table->dropColumn('status');
+		});
+		Schema::table('notif',function($table){
+			$table->boolean('status');
 		});
 	}
 

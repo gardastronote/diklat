@@ -1,5 +1,6 @@
 <?php
 include 'constant.php';
+date_default_timezone_set('Asia/Jakarta');
 /*
 |--------------------------------------------------------------------------
 | Register The Laravel Class Loader

@@ -141,6 +141,7 @@ Route::group(array('before'=>'auth'),function(){
 	});
 
 	Route::get('/data-memo/data/{id}',function($id){
+		$notif = Notification::where('id_memo','=',$id)->where('id_to','=',Auth::user()->id)->where('status','=',0)->update(array('status'=>1));;
 		$memo = Memo::find($id);
 		if(!count($memo)>0){
 			App::abort(404,'Halaman tidak di temukan');
@@ -203,6 +204,18 @@ Route::group(array('before'=>'auth'),function(){
 		));
 
 	Route::get('/delete_memo/{id}','MemoController@deleteMemo');
+
+	/*--------------------------------------------------------------------
+	| Notification
+	|---------------------------------------------------------------------
+	*/
+
+	Route::get('/notif',function(){
+		$notifs = Notification::where('id_to','=',Auth::user()->id)->orderBy('created_at','DESC')->get();
+		return View::make('notif.data_notif',array(
+			'notifs'=>$notifs
+			));
+	});
 
 	/*==================================
 							MEMO COMMENT
