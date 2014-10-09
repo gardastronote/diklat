@@ -75,7 +75,13 @@ Route::group(array('before'=>'auth'),function(){
 	| User
 	|---------------------------------------------------------------------
 	*/
-
+	Route::get('/data-user/add',function(){
+		return View::make('user.merge',array(
+			'url'=>'data-user/add',
+			'submit'=>'Tambah'
+			));
+	});
+	Route::post('/data-user/add','UserController@add');
 	Route::get('data-user/data/{id}',function($id){
 		$user = User::find($id);
 		if(!count($user)>0){

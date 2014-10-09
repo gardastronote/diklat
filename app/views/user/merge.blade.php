@@ -1,4 +1,8 @@
 @extends('layout.main-layout')
+@section('style')
+	@parent
+	<link rel="stylesheet" type="text/css" href="{{asset('css/merge-user.css')}}">
+@stop
 @section('content')
 <section class="row row-white">
 	<div class="col-md-12">
@@ -7,7 +11,7 @@
 		<p><span class="glyphicon glyphicon-exclamation-sign"></span> Jika password tidak di ubah, password tidak perlu di isi</p>
 	</div>
 	@endif
-		{{Form::open(['url'=>'data-user/edit','class'=>'form-horizontal','files'=>true])}}
+		{{Form::open(['url'=>$url,'class'=>'form-horizontal form-merge','files'=>true])}}
 		<div class="form-group @if($errors->has('username')) has-error @endif">
 			{{Form::label('username','User Name',['class'=>'col-md-4 control-label'])}}
 			<div class="col-md-4">

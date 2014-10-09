@@ -233,12 +233,9 @@ class UserController extends BaseController
 		$data->save();
 		return Redirect::to('data-user/data/'.$id)->with('alert-success','Avatar berhasil di hapus');
 	}
-	public function add(){
-		return View::make('user.merge',array(
-			));
-	}
 
-	public function postAdd(){
+
+	public function add(){
 		$input = Input::all();
 		$validated = Validator::make($input,User::rules(),User::messages());
 		if($validated->passes()){

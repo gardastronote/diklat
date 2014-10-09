@@ -45,6 +45,9 @@
 					 <img class="avatar" src="{{asset('avatar/'.Auth::user()->avatar)}}">
 				</a>
 				<ul class="dropdown-menu">
+					@if(Auth::user()->access == ADMIN)
+					<li><a href="{{url('/data-user/add')}}"><span class="glyphicon glyphicon-user"></span> Tambah User</a></li>
+					@endif
 					<li><a href="{{url('data-user/edit/'.Auth::user()->id)}}"><span class="glyphicon glyphicon-cog"></span> Pengaturan</a></li>
 					<li><a href="{{url('/logout')}}"><span class="glyphicon glyphicon-log-out"></span> Keluar</a></li>
 				</ul>
