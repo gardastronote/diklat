@@ -98,7 +98,7 @@ class UserController extends BaseController
 			));
 	}
 
-	public function admin_user_delete($id){
+	public function delete($id){
 		if($id == 7){
 			return Redirect::back()->with('alert-error','Tidak dapat menghapus super admin');
 		}
@@ -112,13 +112,11 @@ class UserController extends BaseController
 				File::delete(public_path().'/memo/'.$memo->memo);
 			}
 		}
-		Memo::where('id_user','=',$id)->delete();
-		Memo_comment::where('id_user','=',$id)->delete();
 		$user = User::where('id','=',$id)->delete();
 		if(!$user){
 			return Redirect::back()->with('alert-error',ERR_DEV);
 		}
-		return Redirect::route('admin_user')->with('alert-success','User berhasil di hapus');
+		return Redirect::to('data-user/')->with('alert-success','User berhasil di hapus');
 	}
 
 /*===================================
@@ -142,7 +140,7 @@ class UserController extends BaseController
 				GLOBAL ACTION
 ===================================*/
 
-	public function user_addPost(){
+	public function add(){
 		$input = Input::all();
 		$validated = Validator::make($input,User::rulesCreate(),User::messages());
 		if($validated->passes()){
@@ -162,7 +160,7 @@ class UserController extends BaseController
 			if(!$created){
 				return Redirect::back()->with('alert-error',ERR_DEV);
 			}
-			return Redirect::action('UserController@admin_user')->with('alert-success','User berhasil di tambahkan');
+			return Redirect::to('data-user/')->with('alert-success','User berhasil di tambahkan');
 		}
 		return Redirect::back()->withErrors($validated)->withInput();
 	}
@@ -197,7 +195,7 @@ class UserController extends BaseController
 			if(!$update){
 				return Redirect::back()->withInput()->with('alert-error',ERR_DEV);
 			}
-			return Redirect::to('data-user/data/'.$input['id'])->with('alert-success','Profil berhasil di ubah');
+			return Redirect::to('data-user/')->with('alert-success','Profil berhasil di ubah');
 		}
 		return Redirect::back()->withInput()->withErrors($validated);
 	}
@@ -231,11 +229,11 @@ class UserController extends BaseController
 		File::delete(public_path().'/avatar/'.$data->avatar);
 		$data->avatar = 'default.png';
 		$data->save();
-		return Redirect::to('data-user/data/'.$id)->with('alert-success','Avatar berhasil di hapus');
+		return Redirect::to('data-user/')->with('alert-success','Avatar berhasil di hapus');
 	}
 
 
-	public function add(){
+	public function post_add(){
 		$input = Input::all();
 		$validated = Validator::make($input,User::rules(),User::messages());
 		if($validated->passes()){
@@ -243,7 +241,7 @@ class UserController extends BaseController
 			if(!$create){
 				return Redirect::back()->withInput()->with('alert-error',ERR_DEV);
 			}
-			return Redirect::route('UserController@profile',$input['username']);
+			return Redirect::to('data-user/');
 		}
 	}
 

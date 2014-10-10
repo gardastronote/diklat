@@ -4,7 +4,7 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('css/merge-user.css')}}">
 @stop
 @section('content')
-<section class="row row-white">
+<section class="row">
 	<div class="col-md-12">
 	@if(isset($user))
 	<div class="alert alert-default text-center">

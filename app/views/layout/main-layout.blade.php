@@ -23,7 +23,11 @@
 			if($total == 0)
 				$total = '';
 			?>
+<<<<<<< HEAD
 			
+=======
+			<li><a href="{{url('/notif')}}"><span class="glyphicon glyphicon-globe"></span> <span style="background-color:rgb(255,0,0)" class="badge">{{$total}}</a></li>
+>>>>>>> upstream/master
 			<li class="dropdown add-memo-hover2">
 				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Memo <b class="caret"></b></a>
 				<ul class="dropdown-menu">
@@ -35,8 +39,23 @@
 					<li class="data-reject"><a href="{{url('/data-memo/rejected')}}">Memo di tolak</a></li>
 				</ul>
 			</li>
+<<<<<<< HEAD
 
 		</ul>
+=======
+			@if(Auth::user()->access == ADMIN)
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">User <b class="caret"></b></a>
+				<ul class="dropdown-menu">
+					<li><a href="{{url('data-user/add')}}">Tambah User</a></li>
+					<li><a href="{{url('data-user/')}}">Data User</a></li>
+				</ul>
+			</li>
+			@endif			
+		</ul>
+		@endif
+		@if(Auth::check())
+>>>>>>> upstream/master
 		<ul class="nav navbar-nav navbar-right">
 		 <li class="lightred-hover"><a href="{{url('/notif')}}"><span class="glyphicon glyphicon-bell"></span> </span> Pemberitahuan <span style="background-color:rgb(255,0,0)" class="badge">{{$total}}</a></li>				
 			<li class="dropdown add-memo-hover">
@@ -45,9 +64,7 @@
 					 <img class="avatar" src="{{asset('avatar/'.Auth::user()->avatar)}}">
 				</a>
 				<ul class="dropdown-menu">
-					@if(Auth::user()->access == ADMIN)
-					<li><a href="{{url('/data-user/add')}}"><span class="glyphicon glyphicon-user"></span> Tambah User</a></li>
-					@endif
+					<li><a href="{{url('data-user/data/'.Auth::user()->id)}}"><span class="glyphicon glyphicon-user"></span> {{Auth::user()->username}}</a></li>
 					<li><a href="{{url('data-user/edit/'.Auth::user()->id)}}"><span class="glyphicon glyphicon-cog"></span> Pengaturan</a></li>
 					<li><a href="{{url('/logout')}}"><span class="glyphicon glyphicon-log-out"></span> Keluar</a></li>
 				</ul>

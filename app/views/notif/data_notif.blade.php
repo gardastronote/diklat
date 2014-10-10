@@ -4,7 +4,7 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('css/notif.css')}}">
 @stop
 @section('content')
-<div class="row row-white">
+<div class="row">
 	<div class="col-md-12">
 		@if(!count($notifs)>0)
 		<h1 class="text-center">Tidak ada pemberitahuan</h1>
