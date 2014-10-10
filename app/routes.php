@@ -12,86 +12,45 @@
 */
 Route::group(array('before'=>'auth'),function(){
 	Route::get('/',array(
-		'as'=>'root',
-		'uses'=>'UserController@index'
-		));
-
-
-	Route::post('/add_user','UserController@user_addPost');
-	Route::post('/edit_user','UserController@user_editPost');
-
-	Route::group(array('before'=>'admin'),function(){
-		Route::get('/admin','UserController@index');
-		Route::get('/admin/user',array(
-			'as'=>'admin_user',
-			'uses'=>'UserController@admin_user'));
-		Route::get('/admin/user/add',array(
-			'as'=>'admin_user_add',
-			'uses'=>'UserController@admin_user_add'
-			));
-
-		Route::get('/admin/user/edit/{id}',array(
-			'as'=>'admin_user_edit',
-			'uses'=>'UserController@admin_user_edit'
-			));
-		Route::get('/admin/user/delete/{id}',array(
-			'as'=>'admin_user_delete',
-			'uses'=>'UserController@admin_user_delete'
-			));
-	});
-	Route::get('/deleteAvatar/{id}','UserController@deleteAvatar');
-	Route::get('/setting',array(
-		'as'=>'setting',
-		'uses'=>'UserController@setting'
-		));
-
-	/*===============================
-								USER
-	===============================*/
-
-	Route::get('/profile',array(
-		'uses'=>'UserController@index'
-		));
-	Route::get('profile/{id}',array(
-		'uses'=>'UserController@profile'
-		));
-	Route::get('profile/{id}/memo',array(
-		'as'=>'user_memo',
-		'uses'=>'UserController@memo'
-		));
-	Route::get('profile/{id}/comment',array(
-		'as'=>'user_comment',
-		'uses'=>'UserController@comment'
-		));
-	Route::post('/profile/setting',array(
-		'uses'=>'UserController@postSetting'
-		));
-
-	Route::get('/task',array(
-		'as'=>'task',
-		'uses'=>'TaskController@index'
+			'as'=>'root',
+			function(){
+				$memos = Memo::orderBy('updated_at','DESC')->orderBy('created_at','DESC')->paginate(10);
+				return View::make('memo.data_memo',array(
+				'memos'=>$memos
+				));
+			}
 		));
 	/*--------------------------------------------------------------------
 	| User
 	|---------------------------------------------------------------------
 	*/
-
+	// route untuk menampilkan seluruh data user
 	Route::get('/data-user',function(){
 		$users = User::orderBy('created_at','DESC')->get();
 		return View::make('user.data_user',array(
 			'users'=>$users
 			));
 	});
+
+	// route menampilkan data user untuk di tambahkan
 	Route::get('/data-user/add',function(){
 		return View::make('user.merge',array(
 			'url'=>'data-user/add',
 			'submit'=>'Tambah'
 			));
 	});
+
+	// route untuk submit data user yg di tambahkan
 	Route::post('/data-user/add','UserController@add');
 
+	// router untuk menghapus avatar
+	Route::get('/deleteAvatar/{id}','UserController@deleteAvatar');
+
+	// route untuk menghapus user
 	Route::get('/data-user/delete/{id}','UserController@delete');
-	Route::get('data-user/data/{id}',function($id){
+
+	// route untuk menampilkan seluruh memo yg di buat user
+	Route::get('data-user/data/{id}',array('before'=>'data-user',function($id){
 		$user = User::find($id);
 		$memos = Memo::where('id_user','=',$id)->orderBy('created_at','DESC')->paginate(10);
 		if(!count($user)>0){
@@ -101,8 +60,9 @@ Route::group(array('before'=>'auth'),function(){
 			'user'=>$user,
 			'memos'=>$memos
 			));
-	});
+	}));
 
+	// route untuk menampilkan pengaturan data user
 	Route::get('data-user/edit/{id}',function($id){
 		$user = User::find($id);
 		if(!count($user)>0){
@@ -115,19 +75,25 @@ Route::group(array('before'=>'auth'),function(){
 			));
 	});
 
+	// route untuk submit hasil pengaturan data user
 	Route::post('data-user/edit','UserController@edit');
 
 	/*--------------------------------------------------------------------
 	| Data memo
 	|---------------------------------------------------------------------
 	*/
+
+	// route untuk pencarian data memo
 	Route::get('/data-memo/search','MemoController@search');
+
+	// route untuk menampilkan seluruh data memo
 	Route::get('/data-memo',function(){
 		$memos = Memo::orderBy('updated_at','DESC')->orderBy('created_at','DESC')->paginate(10);
 		return View::make('memo.data_memo',array(
 			'memos'=>$memos
 			));
 	});
+
 	//data memo unchecked
 	Route::get('/data-memo/unchecked',function(){
 		$memos = Memo::where('status_memo','=',0)->orderBy('created_at','DESC')->paginate(10);
@@ -158,6 +124,7 @@ Route::group(array('before'=>'auth'),function(){
 			));
 	});
 
+	// route untuk menampilkan detail memo
 	Route::get('/data-memo/data/{id}',function($id){
 		$notif = Notification::where('id_memo','=',$id)->where('id_to','=',Auth::user()->id)->where('status','=',0)->update(array('status'=>1));;
 		$memo = Memo::find($id);
@@ -171,6 +138,8 @@ Route::group(array('before'=>'auth'),function(){
 			'comments'=>$comments
 			));
 	});
+
+	// route untuk menambahkan memo
 	Route::get('/data-memo/add',function(){
 		$user = Auth::user();
 		return View::make('memo.merge',array(
@@ -179,7 +148,11 @@ Route::group(array('before'=>'auth'),function(){
 			'btn'=>'Tambah'
 			));
 	});
+
+	// route untuk submit menambahkan memo
 	Route::post('/data-memo/add','MemoController@post_add');
+
+	// route untuk menampilkan form perubahan memo
 	Route::get('/data-memo/edit/{id}',function($id){
 		$memo = Memo::find($id);
 		$user = Auth::user();
@@ -190,16 +163,24 @@ Route::group(array('before'=>'auth'),function(){
 			'btn'=>'Ubah'
 			));
 	});
+
+	// route untuk submit perubahan pada memo
 	Route::post('/data-memo/edit','MemoController@post_edit');
+
+	// route untuk menghapus memo
 	Route::get('/data-memo/delete/{id}','MemoController@delete');
 
+	// route untuk mengubah status memo
 	Route::get('/data-memo/status/{id}/{status}','MemoController@status');
 
 	/*--------------------------------------------------------------------
 	| Comment memo
 	|---------------------------------------------------------------------
 	*/
+	// route untuk menambahkan komentar
+	Route::post('/data-memo/data/comment/add','CommentController@post_add');
 
+	// route untuk mengubah komentar
 	Route::get('/data-memo/data/comment/{id}',function($id){
 		$comment = Memo_comment::find($id);
 		if(!count($comment)>0){
@@ -209,25 +190,19 @@ Route::group(array('before'=>'auth'),function(){
 			'comment'=>$comment
 			));
 	});
-	Route::post('/data-memo/data/comment/edit','CommentController@post_edit');
-	Route::post('/data-memo/data/comment/add','CommentController@post_add');
-	Route::get('/data-memo/data/comment/delete/{id}','CommentController@delete');
-	Route::get('/task/memo',array(
-		'as'=>'task_memo',
-		'uses'=>'MemoController@index'
-		));
-	Route::get('/task/comment',array(
-		'as'=>'task_comment',
-		'uses'=>'CommentController@index'
-		));
 
-	Route::get('/delete_memo/{id}','MemoController@deleteMemo');
+	// route untuk submit perubahan komentar
+	Route::post('/data-memo/data/comment/edit','CommentController@post_edit');
+
+	// route untuk menghapus komentar
+	Route::get('/data-memo/data/comment/delete/{id}','CommentController@delete');
 
 	/*--------------------------------------------------------------------
 	| Notification
 	|---------------------------------------------------------------------
 	*/
 
+	// route untuk menampilkan pemberitahuan
 	Route::get('/notif',function(){
 		$notifs = Notification::where('id_to','=',Auth::user()->id)->orderBy('created_at','DESC')->get();
 		return View::make('notif.data_notif',array(
@@ -235,56 +210,20 @@ Route::group(array('before'=>'auth'),function(){
 			));
 	});
 
-	/*==================================
-							MEMO COMMENT
-	==================================*/
-	Route::get('/task/memo/comment',array(
-		'as'=>'task_memo_comment',
-		'uses'=>'CommentController@index'
-		));
-	Route::get('/task/memo/comment/edit/{id}',array(
-		'uses'=>'CommentController@edit'
-		));
-	Route::post('/task/memo/comment/edit',array(
-		'uses'=>'CommentController@postEdit'
-		));
-	Route::get('/task/memo/comment/delete/{id}',array(
-		'uses'=>'CommentController@delete'
-		));
-
-	/*==================================
-								SEARCH
-	==================================*/
-	Route::get('/search/user',array(
-		'as'=>'search_user',
-		'uses'=>'UserController@search'
-		));
-
-	Route::get('/search/memo',array(
-		'as'=>'serach_memo',
-		'uses'=>'MemoController@search'
-		));
-
-	Route::get('/task/memo/add','MemoController@add');
-	Route::post('/add_memo','MemoController@post');
-	Route::post('/task/memo/comment','CommentController@postAdd');
-	Route::get('/task/memo/view/{id}','MemoController@view');
-
-	Route::group(array('before'=>'memo'),function(){
-
-		Route::get('/task/memo/delete/{id}','MemoController@delete');
-		Route::get('/task/memo/edit/{id}','MemoController@edit');
-	});
-	Route::post('/edit_memo','MemoController@editPost');
 });
 
+
+// route untuk menampilkan form login
 Route::get('/login','UserController@login');
+
+// route untuk submit data login
+Route::post('/login','UserController@postLogin');
+
+// route untuk logout
 Route::get('/logout',array(
 	'as'=>'logout',
 	'uses'=>'UserController@logout'
 	));
-
-Route::post('/login','UserController@postLogin');
 Route::get('/feed',function(){
 	$user = new User;
 	$user->password = Hash::make('admin');

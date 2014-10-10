@@ -97,8 +97,10 @@ Route::filter('memo',function($route){
 
 });
 
-Route::filter('admin',function(){
-	if(Auth::user()->access !== ADMIN){
-		App::abort(403,'Tidak memiliki hak mengakses halaman ini');
+Route::filter('data-user',function($route){
+	$check = $route->getParameter('id');
+	$access = User::find($check);
+	if($access->access == ADMIN || $access->access == PINGROUP){
+		App::abort(404,'Halaman tidak di temukan');
 	}
 });

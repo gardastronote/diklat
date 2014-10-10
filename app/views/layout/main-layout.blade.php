@@ -20,7 +20,7 @@
 			if($total == 0)
 				$total = '';
 			?>
-			<li><a href="{{url('/notif')}}"><span class="glyphicon glyphicon-globe"></span> <span style="background-color:rgb(255,0,0)" class="badge">{{$total}}</a></li>
+			<li><a href="{{url('/notif')}}"><span class="glyphicon glyphicon-bell"></span> <span style="background-color:rgb(255,0,0)" class="badge">{{$total}}</a></li>
 			<li class="dropdown add-memo-hover2">
 				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Memo <b class="caret"></b></a>
 				<ul class="dropdown-menu">

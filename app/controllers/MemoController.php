@@ -56,6 +56,7 @@ class MemoController extends BaseController
 
 	public function post_edit(){
 		$input = Input::all();
+		unset($input['id_user']);
 		$validate = Validator::make($input,Memo::rules($input['id']),Memo::$messages);
 		if($validate->passes()){
 			$memoData = Memo::find($input['id']);
@@ -77,7 +78,7 @@ class MemoController extends BaseController
 			}
 			$edit = $memoData->update($input);
 			if($edit){
-				return Redirect::to('/data-memo')->with('alert-success','Memo berhasil di ubah');
+				return Redirect::to('data-memo/data/'.$input['id'])->with('alert-success','Memo berhasil di ubah');
 			}
 			return Redirect::back()->with('alert-error',ERR_DEV);
 		}
@@ -108,10 +109,10 @@ class MemoController extends BaseController
 			})->orderBy('updated_at','DESC')->paginate(10);
 		}elseif($type == 'username'){
 			$memos = Memo::whereHas('user',function($q){
-				$q->where('username','LIKE','%'.Input::get('query').'%');
+				$q->where('full_name','LIKE','%'.Input::get('query').'%');
 			})->orderBy('updated_at','DESC')->paginate(10);
 		}else{
-			$memos = Memo::where($type,'LIKE',"%$query%")->paginate(7);
+			$memos = Memo::where($type,'LIKE',"%$query%")->paginate(10);
 		}
 
 		return View::make('memo.data_memo',array(

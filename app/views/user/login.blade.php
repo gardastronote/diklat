@@ -6,7 +6,6 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('css/login.css')}}">
 </head>
 <body>
-<div class="bg"></div>
 <div class="container">
 	<div class="row">
 		<div class="col-md-12 text-center">

@@ -29,7 +29,6 @@ class Memo extends Eloquent
 			'jumlah'=>'required|numeric',
 			'lama'=>'required|numeric',
 			'anggaran'=>'required|numeric',
-			'id_user'=>'required|numeric',
 			'memo'=>'mimes:pdf|max:4096'
 			);
 	}
