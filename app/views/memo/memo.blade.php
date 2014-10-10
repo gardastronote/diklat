@@ -16,7 +16,7 @@
 		<h3><small>{{$memo->status}}</small></h3>
 	</div>
 	<div class="col-md-3 memo-ava">
-		<h1><img class="avatar" src="{{asset('avatar/'.$memo->user->avatar)}}"/> {{$memo->user->full_name}} <small class="memo-date">{{date('d M g:i A',strtotime($memo->created_at))}}</small></h1>
+		<a href="{{url('data-user/data/'.$memo->id_user)}}"><h1><img class="avatar" src="{{asset('avatar/'.$memo->user->avatar)}}"/> {{$memo->user->full_name}} <small class="memo-date">{{date('d M g:i A',strtotime($memo->created_at))}}</small></h1></a>
 	</div>
 	@if($memo->status_memo == ACCEPTED)
 		<?php
@@ -151,7 +151,11 @@
 						</ul>
 					</div>
 					@endif
+					@if($comment->user->access == PP)
+					<h3><a class="hover-link" href="{{url('data-user/data/'.$comment->id_user)}}"><img class="avatar" src="{{asset('avatar/'.$comment->user->avatar)}}"> {{$comment->user->full_name}}</a><small>{{date('d M g:i A',strtotime($memo->created_at))}}</small></h3>
+					@else
 					<h3><img class="avatar" src="{{asset('avatar/'.$comment->user->avatar)}}"> {{$comment->user->full_name}} <small>{{date('d M g:i A',strtotime($memo->created_at))}}</small></h3>
+					@endif
 					<p>{{$comment->comment}}</p>
 				</div>
 			</div>

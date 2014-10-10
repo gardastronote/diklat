@@ -1,6 +1,10 @@
 <?php
 class UserController extends BaseController
 {
+	/**
+	 * Redirect ke login page
+	 * @return View:user.login
+	 */
 	public function login(){
 		if(Auth::check()):
 			return Redirect::to('/');
@@ -8,6 +12,10 @@ class UserController extends BaseController
 		return View::make('user.login');
 	}
 
+	/**
+	 * Post data login ketika user submit
+	 * @return View:memo.data_memo
+	 */
 	public function postLogin(){
 		$input = Input::all();
 		$validation = Validator::make($input,User::rulesLogin(),User::messages());
@@ -24,121 +32,14 @@ class UserController extends BaseController
 		return Redirect::to('/login')->withErrors($validation)->with('alert-error','User Name atau Password salah');
 	}
 
+	/**
+	 * Logout user
+	 * @return View:user.login
+	 */
 	public function logout(){
 		Auth::logout();
 		return Redirect::to('/');
 	}
-
-	public function index(){
-		switch($this->user->access)
-		{
-			case ADMIN:
-			$users = User::orderBy('updated_at','DESC')->count();
-			$memos = Memo::orderBy('created_at','DESC')->count();
-			$comments = Memo_comment::orderBy('created_at','DESC')->count();
-			return View::make('user.home',array(
-				'user'=>$this->user,
-				'users'=>$users,
-				'memos'=>$memos,
-				'comments'=>$comments
-				));
-			break;
-
-			case PP:
-				$memos = Memo::orderBy('created_at','DESC')->count();
-				$comments = Memo_comment::orderBy('created_at','DESC')->count();
-			return View::make('user.home',array(
-				'user'=>$this->user,
-				'memos'=>$memos,
-				'comments'=>$comments
-				));
-			case PINGROUP_PP:
-				$memos = Memo::orderBy('created_at','DESC')->count();
-				$comments = Memo_comment::orderBy('created_at','DESC')->count();
-			return View::make('user.home',array(
-				'user'=>$this->user,
-				'memos'=>$memos,
-				'comments'=>$comments
-				));
-		}
-	}
-
-/* =====================================
-						ADMIN SCOPE
-=======================================*/
-
-	public function admin_user(){
-		$users = User::orderBy('created_at','DESC')->paginate(5);
-		return View::make('user.admin.user',array(
-			'user'=>$this->user,
-			'users'=>$users
-			));
-	}
-
-	public function admin_user_add(){
-		return View::make('user.merge',array(
-			'user'=>$this->user,
-			'header'=>'Tambah User',
-			'action'=>'/add_user',
-			'submit'=>'Tambah'
-			));
-	}
-
-	public function admin_user_edit($id){
-		$data = User::find($id);
-		if(!count($data)>0){
-			App::abort(404,'Halaman tidak ada');
-		}
-		return View::make('user.merge',array(
-			'user'=>$this->user,
-			'header'=>'Ubah user',
-			'action'=>'/edit_user',
-			'data'=>$data,
-			'submit'=>'Ubah',
-			));
-	}
-
-	public function delete($id){
-		if($id == 7){
-			return Redirect::back()->with('alert-error','Tidak dapat menghapus super admin');
-		}
-		$user = User::find($id);
-		if($user->avatar !== 'default.png'){
-			File::delete(public_path().'/avatar/'.$user->avatar);
-		}
-		$memos = Memo::where('id_user','=',$id)->get();
-		foreach($memos as $memo){
-			if($memo->memo !== NULL || !empty($memo->memo)){
-				File::delete(public_path().'/memo/'.$memo->memo);
-			}
-		}
-		$user = User::where('id','=',$id)->delete();
-		if(!$user){
-			return Redirect::back()->with('alert-error',ERR_DEV);
-		}
-		return Redirect::to('data-user/')->with('alert-success','User berhasil di hapus');
-	}
-
-/*===================================
-						TASK SCOPE
-====================================*/
-	public function memo($id){
-		$memos = Memo::orderBy('created_at','DESC')->where('id_user','=',$id)->paginate(7);
-		return View::make('user.memo',array(
-			'user'=>$this->user,
-			'memos'=>$memos
-			));
-	}
-	public function comment($id){
-		$comments = Memo_comment::orderBy('created_at','DESC')->where('id_user','=',$id)->paginate(7);
-		return View::make('user.comment',array(
-			'user'=>$this->user,
-			'comments'=>$comments
-			));
-	}
-/*===================================
-				GLOBAL ACTION
-===================================*/
 
 	public function add(){
 		$input = Input::all();
@@ -164,6 +65,28 @@ class UserController extends BaseController
 		}
 		return Redirect::back()->withErrors($validated)->withInput();
 	}
+	
+	public function delete($id){
+		if($id == 7){
+			return Redirect::back()->with('alert-error','Tidak dapat menghapus super admin');
+		}
+		$user = User::find($id);
+		if($user->avatar !== 'default.png'){
+			File::delete(public_path().'/avatar/'.$user->avatar);
+		}
+		$memos = Memo::where('id_user','=',$id)->get();
+		foreach($memos as $memo){
+			if($memo->memo !== NULL || !empty($memo->memo)){
+				File::delete(public_path().'/memo/'.$memo->memo);
+			}
+		}
+		$user = User::where('id','=',$id)->delete();
+		if(!$user){
+			return Redirect::back()->with('alert-error',ERR_DEV);
+		}
+		return Redirect::to('data-user/')->with('alert-success','User berhasil di hapus');
+	}
+
 	public function edit(){
 		$input = Input::all();
 		$user = User::find($input['id']);
@@ -214,48 +137,12 @@ class UserController extends BaseController
 			));
 	}
 
-	public function setting(){
-		return View::make('user.merge',array(
-			'user'=>$this->user,
-			'data'=>$this->user,
-			'header'=>'Pengaturan',
-			'action'=>'/edit_user',
-			'submit'=>'Ubah'
-			));
-	}
-
 	public function deleteAvatar($id){
 		$data = User::find($id);
 		File::delete(public_path().'/avatar/'.$data->avatar);
 		$data->avatar = 'default.png';
 		$data->save();
 		return Redirect::to('data-user/')->with('alert-success','Avatar berhasil di hapus');
-	}
-
-
-	public function post_add(){
-		$input = Input::all();
-		$validated = Validator::make($input,User::rules(),User::messages());
-		if($validated->passes()){
-			$create = User::create($input);
-			if(!$create){
-				return Redirect::back()->withInput()->with('alert-error',ERR_DEV);
-			}
-			return Redirect::to('data-user/');
-		}
-	}
-
-	public function deleteUser($id){
-		if($id == 4){
-			return Redirect::back()->with('alert-error','Tidak dapat menghapus admin');
-		}
-		$user = User::find($id);
-		if(count($user)>0){
-			$delete = $user->delete();
-			if($delete)
-				return Redirect::back()->withInput()->with('alert-error',ERR_DEV);
-		}
-		App::abort('404','Halaman tidak di temukan');
 	}
 
 	public function search(){
