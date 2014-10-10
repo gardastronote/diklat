@@ -48,7 +48,6 @@
 		</ul>
 		@endif
 		@if(Auth::check())
->>>>>>> upstream/master
 		<ul class="nav navbar-nav navbar-right">
 		 <li class="lightred-hover"><a href="{{url('/notif')}}"><span class="glyphicon glyphicon-bell"></span> </span> Pemberitahuan <span style="background-color:rgb(255,0,0)" class="badge">{{$total}}</a></li>				
 			<li class="dropdown add-memo-hover">
