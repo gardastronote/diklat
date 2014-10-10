@@ -1,39 +1,10 @@
 body{
-	background-image: url('../images/background.png');
+	padding-top: 20px;
+	background-image: url('../images/bg.png');
 	background-position: fixed;
 	background-repeat: no-repeat;
 	-webkit-background-size: cover;
 }
-.login{
-	color: #000;
-	background-color: rgba(255,255,255,.7);
-	padding: 10px;
-	margin-top: 30px;
-	border-radius: 7px;
-}
-
-.error-info{
-	text-align: center;
-}
-
-.has-error p{
-	margin: 0;
-	padding: 0;
-}
-
-.info {
-	margin-top: 30px;
-}
-.info {
-	color: #fff;
-	background-color: rgba(0,0,0,0);
-}
-.info p{
-	margin-top: 70px;
-	font-size: 1.7em;
-}
-
-.info h1{
-	font-size: 4em;
-	font-weight: bolder;
+.logo-bjb{
+	max-height: 150px;
 }

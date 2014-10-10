@@ -76,7 +76,7 @@ Route::group(array('before'=>'auth'),function(){
 	|---------------------------------------------------------------------
 	*/
 
-	Route::get('/data-user/data',function(){
+	Route::get('/data-user',function(){
 		$users = User::orderBy('created_at','DESC')->get();
 		return View::make('user.data_user',array(
 			'users'=>$users
@@ -89,13 +89,17 @@ Route::group(array('before'=>'auth'),function(){
 			));
 	});
 	Route::post('/data-user/add','UserController@add');
+
+	Route::get('/data-user/delete/{id}','UserController@delete');
 	Route::get('data-user/data/{id}',function($id){
 		$user = User::find($id);
+		$memos = Memo::where('id_user','=',$id)->orderBy('created_at','DESC')->paginate(10);
 		if(!count($user)>0){
 			App::abort(404,'Halaman tidak di temukan');
 		}
 		return View::make('user.data-user',array(
-			'user'=>$user
+			'user'=>$user,
+			'memos'=>$memos
 			));
 	});
 

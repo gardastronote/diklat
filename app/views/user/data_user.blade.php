@@ -16,7 +16,7 @@
 					<a href="#" class=" dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="{{url('data-user/edit/'.$user->id)}}">Ubah</a></li>
-						<li class="data-delete"><a href="#">Hapus</a></li>
+						<li class="data-delete"><a href="{{url('data-user/delete/'.$user->id)}}">Hapus</a></li>
 					</ul>
 				</div>
 			</li>

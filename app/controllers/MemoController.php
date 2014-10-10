@@ -99,13 +99,17 @@ class MemoController extends BaseController
 	public function search(){
 		$type = Input::get('type');
 		$query = Input::get('query');
-		if($type !== 'nomor_memo' && $type !== 'nama_memo' && $type !== 'rbb' && $type !== 'karakter'){
+		if($type !== 'username' && $type !== 'nomor_memo' && $type !== 'nama_memo' && $type !== 'rbb' && $type !== 'karakter'){
 			App::abort(404,'Halaman tidak ditemukan');
 		}
 		if($type == 'rbb'){
 			$memos = Memo::whereHas('rbb',function($q){
 				$q->where('rbb','LIKE',"%".Input::get('query')."%");
-			})->orderBy('updated_at','DESC')->paginate(7);
+			})->orderBy('updated_at','DESC')->paginate(10);
+		}elseif($type == 'username'){
+			$memos = Memo::whereHas('user',function($q){
+				$q->where('username','LIKE','%'.Input::get('query').'%');
+			})->orderBy('updated_at','DESC')->paginate(10);
 		}else{
 			$memos = Memo::where($type,'LIKE',"%$query%")->paginate(7);
 		}

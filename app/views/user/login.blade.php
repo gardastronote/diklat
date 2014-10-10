@@ -1,51 +1,61 @@
-@extends('layout.main-layout')
-@section('content')
-<div class="row">
-	<div class="col-md-12 text-center">
-		<h1>Diklat BJB</h1>
-		<h2><small>Service Excellent - Profesionalism - Integrity - Respect - Intelligence - Trust</small></h2> 
-	</div>
-</div>
-@if(Session::has('error.login'))
-<div class="row">
-	<div class="col-md-8 col-md-offset-2 text-center">
-		<div class="alert alert-danger">
-			<p class="help-block"><span class="glyphicon glyphicon-exclamation-sign"></span>{{Session::pull('error.login')}}</p>
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="{{asset('bootstrap/css/bootstrap.min.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{asset('css/main-layout.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{asset('css/login.css')}}">
+</head>
+<body>
+<div class="bg"></div>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<img class="logo-bjb" src="{{asset('images/logo.png')}}">
+			<h2><small style="color:#FFF">Service Excellent - Profesionalism - Integrity - Respect - Intelligence - Trust</small></h2> 
 		</div>
 	</div>
-</div>
-@endif
-<div class="row">
-	<div class="col-md-8 col-md-offset-4">
-		{{ Form::open(['url'=>'/login','class'=>'form-horizontal']) }}
-		<div class="form-group @if($errors->has('username')) has-error @endif">
-			<div class="col-md-6">
-			 <div class="input-group"> 
-			  <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
-				{{ Form::text('username','',['class'=>'form-control input-lg','placeholder'=>'User Name']) }}
-			  </div>	
-			 </div>
-			<div class="col-md-6"> 
-				@if($errors->has('username'))<p class="help-block">{{$errors->first('username')}}</p>@endif
+	@if(Session::has('error.login') || $errors->has('password') || $errors->has('username'))
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2 text-center">
+			<div class="alert alert-danger">
+				<p class="help-block"><span class="glyphicon glyphicon-exclamation-sign"></span>
+					@if(Session::has('error.login'))
+						{{Session::pull('error.login')}}
+					@else
+						Username dan Password harus di isi
+					@endif
+				</p>
 			</div>
 		</div>
-		<div class="form-group @if($errors->has('password')) has-error @endif">
-			<div class="col-md-6"> 
-			 <div class="input-group"> 
-			  <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
-				{{ Form::password('password',['class'=>'form-control input-lg','placeholder'=>'Password']) }}
-			  </div>	
-			 </div>
-			<div class="col-md-6">
-				@if($errors->has('password'))<p class="help-block">{{$errors->first('password')}}</p>@endif
+	</div>
+	@endif
+	<div class="row">
+		<div class="col-md-8 col-md-offset-4">
+			{{ Form::open(['url'=>'/login','class'=>'form-horizontal']) }}
+			<div class="form-group">
+				<div class="col-md-6">
+				 <div class="input-group"> 
+				  <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
+					{{ Form::text('username','',['class'=>'form-control input-lg','placeholder'=>'User Name']) }}
+				  </div>	
+				 </div>
 			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-md-6">
-				{{ Form::submit('Login',['class'=>'btn-flat btn btn-primary btn-block']) }}
+			<div class="form-group">
+				<div class="col-md-6"> 
+				 <div class="input-group"> 
+				  <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
+					{{ Form::password('password',['class'=>'form-control input-lg','placeholder'=>'Password']) }}
+				  </div>	
+				 </div>
 			</div>
+			<div class="form-group">
+				<div class="col-md-6">
+					{{ Form::submit('Login',['class'=>'btn-flat btn btn-primary btn-block']) }}
+				</div>
+			</div>
+			{{ Form::close() }}
 		</div>
-		{{ Form::close() }}
 	</div>
 </div>
-@stop
+</body>
+</html>
