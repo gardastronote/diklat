@@ -12,6 +12,9 @@
 	<div class="container">
 		@if(Auth::check())
 		<ul class="nav navbar-nav">
+			<li><img class="logo-bjb text-center" src="{{asset('images/logo_black.png')}}"></li>
+		</ul>
+		<ul class="nav navbar-nav">
 			@if(Auth::user()->access == PP || Auth::user()->access == ADMIN )
 			<li class="add-memo add-memo-hover"><a href="{{url('data-memo/add')}}"><span class="glyphicon glyphicon-edit"></span> Buat Memo</a></li>
 			@endif
@@ -20,7 +23,7 @@
 			if($total == 0)
 				$total = '';
 			?>
-			<li><a href="{{url('/notif')}}"><span class="glyphicon glyphicon-globe"></span> </span> Pemberitahuan <span style="background-color:rgb(255,0,0)" class="badge">{{$total}}</a></li>
+			
 			<li class="dropdown add-memo-hover2">
 				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Memo <b class="caret"></b></a>
 				<ul class="dropdown-menu">
@@ -31,15 +34,12 @@
 					<li class="data-edit"><a href="{{url('/data-memo/edit')}}">Memo harus di ubah</a></li>
 					<li class="data-reject"><a href="{{url('/data-memo/rejected')}}">Memo di tolak</a></li>
 				</ul>
-			</li>			
+			</li>
+
 		</ul>
-		@endif
-		<ul class="nav navbar-nav">
-			<li><img class="logo-bjb text-center" src="{{asset('images/logo_black.png')}}"></li>
-		</ul>
-		@if(Auth::check())
 		<ul class="nav navbar-nav navbar-right">
-			<li class="dropdown add-memo-hover2">
+		 <li class="lightred-hover"><a href="{{url('/notif')}}"><span class="glyphicon glyphicon-bell"></span> </span> Pemberitahuan <span style="background-color:rgb(255,0,0)" class="badge">{{$total}}</a></li>				
+			<li class="dropdown add-memo-hover">
 				<a class="dropdown-toggle ava-menu" data-toggle="dropdown" href="#">
 					 <b class="caret"></b> {{Auth::user()->full_name}}
 					 <img class="avatar" src="{{asset('avatar/'.Auth::user()->avatar)}}">

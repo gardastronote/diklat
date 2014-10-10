@@ -25,7 +25,7 @@ body {
 	background-color: lightgreen;
 }
 .add-memo-hover2:hover{
-	background-color: lightblue;
+	background-color: lightgreen;
 }
 
 .ava-menu img{
@@ -34,10 +34,14 @@ body {
 }
 
 .logo-bjb{
-	height: 30px;
+	height: 28px;
 	width: 40px;
-	margin-top:6px;
-	margin-left: 10px;
+	margin:10px;
+	margin-left:-20px;
+	opacity: 0.1;
+}
+.lightred-hover:hover{
+	background-color: #FF6666;
 }
 .navbar-fixed-top{
 	background-color: rgba(255,255,255,1);
