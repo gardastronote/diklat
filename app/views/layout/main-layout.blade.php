@@ -11,9 +11,7 @@
 <nav class="navbar navbar-default navbar-fixed-top navbar-menu">
 	<div class="container">
 		@if(Auth::check())
-		<ul class="nav navbar-nav">
-			<li><img class="logo-bjb text-center" src="{{asset('images/logo_black.png')}}"></li>
-		</ul>
+	
 		<ul class="nav navbar-nav">
 			@if(Auth::user()->access == PP || Auth::user()->access == ADMIN )
 			<li class="add-memo add-memo-hover"><a href="{{url('data-memo/add')}}"><span class="glyphicon glyphicon-edit"></span> Buat Memo</a></li>
