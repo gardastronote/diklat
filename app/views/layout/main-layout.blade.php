@@ -11,6 +11,7 @@
 <nav class="navbar navbar-default navbar-fixed-top navbar-menu">
 	<div class="container">
 		@if(Auth::check())
+	
 		<ul class="nav navbar-nav">
 			@if(Auth::user()->access == PP || Auth::user()->access == ADMIN )
 			<li class="add-memo add-memo-hover"><a href="{{url('data-memo/add')}}"><span class="glyphicon glyphicon-edit"></span> Buat Memo</a></li>
@@ -20,7 +21,9 @@
 			if($total == 0)
 				$total = '';
 			?>
+
 			<li><a href="{{url('/notif')}}"><span class="glyphicon glyphicon-bell"></span> <span style="background-color:rgb(255,0,0)" class="badge">{{$total}}</a></li>
+
 			<li class="dropdown add-memo-hover2">
 				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Memo <b class="caret"></b></a>
 				<ul class="dropdown-menu">
@@ -32,6 +35,7 @@
 					<li class="data-reject"><a href="{{url('/data-memo/rejected')}}">Memo di tolak</a></li>
 				</ul>
 			</li>
+		</ul>
 			@if(Auth::user()->access == ADMIN)
 			<li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">User <b class="caret"></b></a>
@@ -45,7 +49,8 @@
 		@endif
 		@if(Auth::check())
 		<ul class="nav navbar-nav navbar-right">
-			<li class="dropdown add-memo-hover2">
+		 <li class="lightred-hover"><a href="{{url('/notif')}}"><span class="glyphicon glyphicon-bell"></span> </span> Pemberitahuan <span style="background-color:rgb(255,0,0)" class="badge">{{$total}}</a></li>				
+			<li class="dropdown add-memo-hover">
 				<a class="dropdown-toggle ava-menu" data-toggle="dropdown" href="#">
 					 <b class="caret"></b> {{Auth::user()->full_name}}
 					 <img class="avatar" src="{{asset('avatar/'.Auth::user()->avatar)}}">
