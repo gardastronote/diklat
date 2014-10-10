@@ -231,4 +231,7 @@ Route::get('/feed',function(){
 	$user->access = 1;
 	$user->save();
 });
+Route::get('/iksaniks',function(){
+	return 'Woohoo';
+});
 ?>
