@@ -23,11 +23,7 @@
 			if($total == 0)
 				$total = '';
 			?>
-<<<<<<< HEAD
-			
-=======
-			<li><a href="{{url('/notif')}}"><span class="glyphicon glyphicon-globe"></span> <span style="background-color:rgb(255,0,0)" class="badge">{{$total}}</a></li>
->>>>>>> upstream/master
+			<li><a href="{{url('/notif')}}"><span class="glyphicon glyphicon-globe"></span> <span style="background-color:rgb(255,0,0)" class="badge">{{$total}}</a></li>r
 			<li class="dropdown add-memo-hover2">
 				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Memo <b class="caret"></b></a>
 				<ul class="dropdown-menu">
@@ -39,10 +35,7 @@
 					<li class="data-reject"><a href="{{url('/data-memo/rejected')}}">Memo di tolak</a></li>
 				</ul>
 			</li>
-<<<<<<< HEAD
-
 		</ul>
-=======
 			@if(Auth::user()->access == ADMIN)
 			<li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">User <b class="caret"></b></a>
